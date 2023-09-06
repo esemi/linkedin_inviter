@@ -1,0 +1,1 @@
+00  13  *   *   *   ~/venv/bin/python -m app.inviter >> ~/logs/inviter-berlin.log 2>&1

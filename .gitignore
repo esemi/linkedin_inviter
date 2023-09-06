@@ -6,4 +6,4 @@ __pycache__
 .env
 .coverage
 *.pyc
-.inviter_session
+.inviter_session*

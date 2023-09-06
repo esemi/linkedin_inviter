@@ -9,7 +9,7 @@ class AppSettings(BaseSettings):
     """Application settings class."""
 
     base_host: str = 'https://www.linkedin.com/'
-    search_url: str = 'https://www.linkedin.com/search/results/people/?geoUrn=%5B%22104508036%22%2C%22106156085%22%2C%2290010322%22%5D&keywords=recruiter&origin=FACETED_SEARCH&profileLanguage=%5B%22en%22%2C%22ru%22%5D&titleFreeText=recruiter'  # noqa: WPS323, E501
+    search_url: str = 'https://www.linkedin.com/search/results/people/?geoUrn=%5B%2290010322%22%2C%22103973174%22%2C%22106156085%22%2C%22104508036%22%5D&keywords=recruiter&origin=FACETED_SEARCH&profileLanguage=%5B%22en%22%2C%22ru%22%5D&sid=a6%40&titleFreeText=recruiter'  # noqa: WPS323, E501
 
     limit_invites: int = 10  # 30 per week for fresh accounts
     limit_failures: int = 2

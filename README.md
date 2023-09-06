@@ -29,7 +29,7 @@ python -m app.inviter
 ```bash
 add-apt-repository ppa:deadsnakes/ppa
 apt update
-apt install python3.11 python3.11-venv python3.11-dev
+apt install python3.11 python3.11-venv python3.11-dev google-chrome-stable
 adduser USERNAME
 scp -r .inviter_session/ USERNAME@HOSTNAME:~/.inviter_session 
 ```

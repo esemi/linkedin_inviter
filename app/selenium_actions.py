@@ -6,6 +6,7 @@ import uuid
 
 from selenium.webdriver import ActionChains, Chrome, Keys
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 
@@ -31,7 +32,11 @@ def create_browser() -> WebDriver:
     for option in options:
         chrome_options.add_argument(option)
 
-    browser = Chrome(options=chrome_options)
+    if app_settings.chrome_path:
+        chrome_options.binary_location = app_settings.chrome_path
+
+    service = Service(executable_path=app_settings.chrome_driver_path)
+    browser = Chrome(options=chrome_options, service=service)
     browser.maximize_window()
     browser.implicitly_wait(app_settings.timeout_default)
     return browser

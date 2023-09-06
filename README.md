@@ -31,5 +31,15 @@ add-apt-repository ppa:deadsnakes/ppa
 apt update
 apt install python3.11 python3.11-venv python3.11-dev google-chrome-stable
 adduser USERNAME
+
+# https://googlechromelabs.github.io/chrome-for-testing/
+su - USERNAME
+mkdir bin
+cd bin
+wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chrome-linux64.zip
+unzip chrome-linux64.zip
+wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chromedriver-linux64.zip
+unzip chromedriver-linux64.zip
+
 scp -r .inviter_session/ USERNAME@HOSTNAME:~/.inviter_session 
 ```

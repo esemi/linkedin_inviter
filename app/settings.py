@@ -4,6 +4,13 @@ import os
 
 from pydantic_settings import BaseSettings
 
+APP_PATH = os.path.abspath(
+    os.path.join(
+        os.path.dirname(__file__),
+        '..',
+    ),
+)
+
 
 class AppSettings(BaseSettings):
     """Application settings class."""
@@ -20,22 +27,13 @@ class AppSettings(BaseSettings):
     throttling_seconds: int = 5
 
     headless: bool = True
-    session_path: str = os.path.abspath(
-        os.path.join(
-            os.path.dirname(__file__),
-            '..',
-            '.inviter_session',
-        ),
-    )
-    screenshots_path: str = os.path.abspath(
-        os.path.join(
-            os.path.dirname(__file__),
-            '..',
-            'screenshots',
-        ),
-    )
+    session_path: str = os.path.join(APP_PATH, '.inviter_session')
+    screenshots_path: str = os.path.join(APP_PATH, 'screenshots')
+
+    chrome_path: str = os.path.join(APP_PATH, 'bin', 'chrome-linux64', 'chrome')
+    chrome_driver_path: str = os.path.join(APP_PATH, 'bin', 'chromedriver-linux64', 'chromedriver')
 
 
 app_settings = AppSettings(
-    _env_file=os.path.join(os.path.dirname(__file__), '..', '.env'),  # type: ignore
+    _env_file=os.path.join(APP_PATH, '.env'),  # type: ignore
 )

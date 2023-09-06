@@ -1,1 +1,1 @@
-00  12  *   *   *   ~/venv/bin/python -m app.inviter
+00  12  *   *   *   ~/venv/bin/python -m app.inviter >> ~/logs/inviter.log 2>&1

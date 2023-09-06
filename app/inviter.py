@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 
-from app.selenium_actions import click, create_browser, highlight
+from app.selenium_actions import click, create_browser, highlight, save_screenshot
 from app.settings import app_settings
 from app.status import InviteStatus
 
@@ -69,6 +69,7 @@ def _open_ll() -> WebDriver | None:
         browser.find_element(By.XPATH, '//a[contains(@class,"ember-view")]')
         return browser
     except NoSuchElementException:
+        save_screenshot(browser)
         logger.debug('auth failure')
 
     browser.quit()
@@ -97,11 +98,14 @@ def _process_connect(browser: WebDriver, button_element: WebElement) -> InviteSt
         )
     except NoSuchElementException:
         logger.warning('send button not found')
+        save_screenshot(browser)
         return InviteStatus.failure
 
     time.sleep(app_settings.throttling_seconds)
     click(browser, send_button)
     time.sleep(app_settings.throttling_seconds)
+    # todo press escape button
+
     # todo check limit popup InviteStatus.FAILURE
     # todo check "input email for connect" popup InviteStatus.UNSUCCESSFUL
     return InviteStatus.success

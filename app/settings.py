@@ -19,11 +19,19 @@ class AppSettings(BaseSettings):
     timeout_default: int = 10
     throttling_seconds: int = 5
 
+    headless: bool = True
     session_path: str = os.path.abspath(
         os.path.join(
             os.path.dirname(__file__),
             '..',
             '.inviter_session',
+        ),
+    )
+    screenshots_path: str = os.path.abspath(
+        os.path.join(
+            os.path.dirname(__file__),
+            '..',
+            'screenshots',
         ),
     )
 

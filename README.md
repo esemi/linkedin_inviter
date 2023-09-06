@@ -23,3 +23,13 @@ $ poetry run flake8 app/
 ```bash
 python -m app.inviter
 ```
+
+
+### Destination host preparing
+```bash
+add-apt-repository ppa:deadsnakes/ppa
+apt update
+apt install python3.11 python3.11-venv python3.11-dev
+adduser USERNAME
+scp -r .inviter_session/ USERNAME@HOSTNAME:~/.inviter_session 
+```

@@ -20,12 +20,12 @@ jobs:
       - name: deploy prague
         uses: cross-the-world/ssh-scp-ssh-pipelines@v1.1.4
         env:
-          TARGET_DIR: /home/${{ secrets.SSH_USERNAME_PRODUCTION }}
+          TARGET_DIR: /home/${{ secrets.SSH_USERNAME_PRAGUE }}
           VENV_BIN: venv/bin
         with:
-          host: ${{ secrets.SSH_HOST_PRODUCTION }}
-          user: ${{ secrets.SSH_USERNAME_PRODUCTION }}
-          pass: ${{ secrets.SSH_PASSWORD_PRODUCTION }}
+          host: ${{ secrets.SSH_HOST }}
+          user: ${{ secrets.SSH_USERNAME_PRAGUE }}
+          pass: ${{ secrets.SSH_PASSWORD_PRAGUE }}
           port: 22
           connect_timeout: 10s
           first_ssh: |-
@@ -35,7 +35,7 @@ jobs:
 
           scp: |-
             './app/*' => $TARGET_DIR/app/
-            './crontab.txt' => $TARGET_DIR
+            './crontab-prague.txt' => $TARGET_DIR
             ./poetry.lock => $TARGET_DIR
             ./pyproject.toml => $TARGET_DIR
 
@@ -44,4 +44,4 @@ jobs:
             $VENV_BIN/poetry config virtualenvs.create false --local
             $VENV_BIN/poetry install --only main
             $VENV_BIN/pip cache purge
-            crontab crontab.txt
+            crontab crontab-prague.txt

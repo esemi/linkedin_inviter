@@ -1,9 +1,10 @@
 """Selenium webdriver actions."""
 import logging
 import os
+import time
 import uuid
 
-from selenium import webdriver
+from selenium.webdriver import ActionChains, Chrome, Keys
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
@@ -30,13 +31,13 @@ def create_browser() -> WebDriver:
     for option in options:
         chrome_options.add_argument(option)
 
-    browser = webdriver.Chrome(options=chrome_options)
+    browser = Chrome(options=chrome_options)
     browser.maximize_window()
     browser.implicitly_wait(app_settings.timeout_default)
     return browser
 
 
-def highlight(browser: WebDriver, element: WebElement):
+def highlight(browser: WebDriver, element: WebElement) -> None:
     """Highlights a Selenium Webdriver element."""
     browser.execute_script(
         "arguments[0].setAttribute('style', arguments[1]);",
@@ -45,9 +46,16 @@ def highlight(browser: WebDriver, element: WebElement):
     )
 
 
-def click(browser: WebDriver, element: WebElement):
+def click(browser: WebDriver, element: WebElement) -> None:
     """Click on element by javascript."""
+    time.sleep(app_settings.throttling_seconds)
     browser.execute_script('arguments[0].click();', element)
+
+
+def press_escape(browser: WebDriver) -> None:
+    """Send ESCAPE button press event."""
+    time.sleep(app_settings.throttling_seconds)
+    ActionChains(browser).send_keys(Keys.ESCAPE).perform()
 
 
 def save_screenshot(browser: WebDriver) -> str:

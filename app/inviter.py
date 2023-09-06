@@ -1,14 +1,13 @@
 """Inviter cron task."""
 
 import logging
-import time
 
 from selenium.common import NoSuchElementException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.remote.webelement import WebElement
 
-from app.selenium_actions import click, create_browser, highlight, save_screenshot
+from app.selenium_actions import click, create_browser, highlight, press_escape, save_screenshot
 from app.settings import app_settings
 from app.status import InviteStatus
 
@@ -88,7 +87,6 @@ def _get_connections(browser: WebDriver, page: int) -> list[WebElement]:
 
 def _process_connect(browser: WebDriver, button_element: WebElement) -> InviteStatus:
     highlight(browser, button_element)
-    time.sleep(app_settings.throttling_seconds)
     click(browser, button_element)
 
     try:
@@ -101,14 +99,20 @@ def _process_connect(browser: WebDriver, button_element: WebElement) -> InviteSt
         save_screenshot(browser)
         return InviteStatus.failure
 
-    time.sleep(app_settings.throttling_seconds)
     click(browser, send_button)
-    time.sleep(app_settings.throttling_seconds)
-    # todo press escape button
 
-    # todo check limit popup InviteStatus.FAILURE
-    # todo check "input email for connect" popup InviteStatus.UNSUCCESSFUL
-    return InviteStatus.success
+    try:
+        browser.find_element(
+            By.XPATH,
+            '//h2[@id="ip-fuse-limit-alert__header"]',
+        )
+    except NoSuchElementException:
+        return InviteStatus.success
+
+    logger.warning('limit popup fired!')
+    save_screenshot(browser)
+    press_escape(browser)
+    return InviteStatus.failure
 
 
 if __name__ == '__main__':

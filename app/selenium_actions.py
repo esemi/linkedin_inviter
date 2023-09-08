@@ -35,7 +35,7 @@ def create_browser() -> WebDriver:
     if app_settings.chrome_path:
         chrome_options.binary_location = app_settings.chrome_path
 
-    service = Service(executable_path=app_settings.chrome_driver_path)
+    service = Service(executable_path=app_settings.chrome_driver_path or None)
     browser = Chrome(options=chrome_options, service=service)
     browser.maximize_window()
     browser.implicitly_wait(app_settings.timeout_default)

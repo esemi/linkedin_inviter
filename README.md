@@ -11,6 +11,11 @@ python3.11 -m venv venv
 source venv/bin/activate
 pip install -U poetry
 poetry install
+cd bin
+wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chrome-linux64.zip
+unzip chrome-linux64.zip
+wget https://edgedl.me.gvt1.com/edgedl/chrome/chrome-for-testing/116.0.5845.96/linux64/chromedriver-linux64.zip
+unzip chromedriver-linux64.zip
 ```
 
 ### Run linters

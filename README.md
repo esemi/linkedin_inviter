@@ -3,6 +3,12 @@ Linkedin inviter.
 [![linters](https://github.com/esemi/linkedin_inviter/actions/workflows/linters.yml/badge.svg?branch=master)](https://github.com/esemi/linkedin_inviter/actions/workflows/linters.yml)
 
 
+Utility to automatically expand your circle of connections on Linkedin based on search results.
+
+## Disclaimer
+Use of this type of software violates LinkedIn's TOS.
+
+
 ### Local setup
 ```bash
 git clone git@github.com:esemi/linkedin_inviter.git
